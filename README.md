@@ -1,5 +1,6 @@
 # nanofont3x4
 The world's smallest readable font 3x3 uppercase, 3x4 lowercase, includes all ASCII.
+A practical example would be rendering "book pages" with real text instead of placeholder blurry pixels.
 
 * Texture Atlas:
 
