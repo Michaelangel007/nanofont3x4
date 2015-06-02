@@ -15,5 +15,6 @@ The world's smallest readable font 3x3 uppercase, 3x4 lowercase, includes all AS
 
 * Upper case on its own source code:
    `nanofont3x4 -u nanofont3x4.cpp`
+
 <img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper.bmp">
 
