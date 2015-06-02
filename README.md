@@ -5,5 +5,7 @@ i.e.
 
    `nanofont3x4 -u nanofont3x4.cpp`
 
-[3x4 Texture Atlas](https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/nanofont3x4.bmp)
+Texture Atlas:
+
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/nanofont3x4.bmp">
 
