@@ -18,3 +18,6 @@ The world's smallest readable font 3x3 uppercase, 3x4 lowercase, includes all AS
 
 <img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper.bmp">
 
+* Fake Bold
+
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_bold_sources_ken.png">
