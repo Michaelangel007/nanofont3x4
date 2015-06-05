@@ -175,11 +175,11 @@ bool BMP_Write( const char *filename, int bitsPerPixel, unsigned int width, unsi
 
     aHeader[ 0] = ((int)'B' << 0) | ((int)'M' << 8); // Magic File Type 0x424D "BM"
     aHeader[ 1] = nTotalSize & _16;      // bfSize          Total file size (0x14 + 0x40 + palette + texels)
-    aHeader[ 2] = nTotalSize >> 16;      //            
+    aHeader[ 2] = nTotalSize >> 16;      //
     aHeader[ 3] = 0;                     // bfReserved 
-    aHeader[ 4] = 0;                     //            
+    aHeader[ 4] = 0;                     //
     aHeader[ 5] = nTexelOffset & _16;    // bfOffbits       Offset of texels
-    aHeader[ 6] = nTexelOffset >> 16;    //            
+    aHeader[ 6] = nTexelOffset >> 16;    //
 
     aHeader[ 7] = BITMAPINFOHEADER_SIZE; // biSize          Size of this header (0x40)
     aHeader[ 8] = 0;                     //
@@ -224,7 +224,7 @@ bool BMP_Write( const char *filename, int bitsPerPixel, unsigned int width, unsi
         }
 
         if( bitsPerPixel == outBitsPerPixel )
-        { 
+        {
             const uint8_t *data = pixels + nWidthBytes*height - nWidthBytes; // Stupid Windows .BMP are upside down
             for( int y = height; y > 0; --y, data -= nWidthBytes )
             {
@@ -259,8 +259,8 @@ bool BMP_Write( const char *filename, int bitsPerPixel, unsigned int width, unsi
                     fprintf( file, "%c", 0x00 );
             }
         }
-		else
-			printf( "Unsported BPP: %d != %d\n", bitsPerPixel, outBitsPerPixel );
+        else
+            printf( "Unsported BPP: %d != %d\n", bitsPerPixel, outBitsPerPixel );
 
         fclose( file );
     }
@@ -325,20 +325,20 @@ uint16_t aGlyphs3x4[] =
     0x6EC0, // 0x38 8 011 111 110
     0xEE20, // 0x39 9 111 111 001
     0x4040, // 0x3A : 010 000 010
-    0x0448, // 0x3B ; 000 010 010 100 
+    0x0448, // 0x3B ; 000 010 010 100
     0x4840, // 0x3C < 010 100 010
     0xE0E0, // 0x3D = 111 000 111
     0x4240, // 0x3E > 010 001 010
     0x6240, // 0x3F ? 011 001 010
 
-    0xCC20, // 0x40 @ 110 110 001 // 0 = 000 _
-    0x4EA0, // 0x41 A 010 111 101 // 2 = 001 _
-    0xCEE0, // 0x42 B 110 111 111 // 4 = 010 _
-    0x6860, // 0x43 C 011 100 011 // 6 = 011 _
-    0xCAC0, // 0x44 D 110 101 110 // 8 = 100 _
-    0xECE0, // 0x45 E 111 110 111 // A = 101 _
-    0xEC80, // 0x46 F 111 110 100 // C = 110 _
-    0xCAE0, // 0x47 G 110 101 111 // E = 111 _
+    0xCC20, // 0x40 @ 110 110 001 // 0 = 000_
+    0x4EA0, // 0x41 A 010 111 101 // 2 = 001_
+    0xCEE0, // 0x42 B 110 111 111 // 4 = 010_
+    0x6860, // 0x43 C 011 100 011 // 6 = 011_
+    0xCAC0, // 0x44 D 110 101 110 // 8 = 100_
+    0xECE0, // 0x45 E 111 110 111 // A = 101_
+    0xEC80, // 0x46 F 111 110 100 // C = 110_
+    0xCAE0, // 0x47 G 110 101 111 // E = 111_
     0xAEA0, // 0x48 H 101 111 101
     0x4440, // 0x49 I 010 010 010
     0x22C0, // 0x4A J 001 001 110
@@ -405,7 +405,7 @@ uint16_t aGlyphs3x4[] =
 // ======================================================================== 
 uint16_t SwapNibblesBitReverse( uint16_t x )
 {
-    const uint8_t nibble[ 16 ] =
+    const uint8_t aReverseNibble[ 16 ] =
     {
         0x0, // 0  0000 -> 0000
         0x8, // 1  0001 -> 1000
@@ -425,10 +425,12 @@ uint16_t SwapNibblesBitReverse( uint16_t x )
         0x7, // E  1110 -> 0111
         0xF  // F  1111 -> 1111
     };
-    return  (nibble[ (x >> 12) & 0xF ] <<  0)
-    |       (nibble[ (x >>  8) & 0xF ] <<  4)
-    |       (nibble[ (x >>  4) & 0xF ] <<  8)
-    |       (nibble[ (x >>  0) & 0xF ] << 12); 
+
+    return 0
+        | (aReverseNibble[ (x >> 12) & 0xF ] <<  0)
+        | (aReverseNibble[ (x >>  8) & 0xF ] <<  4)
+        | (aReverseNibble[ (x >>  4) & 0xF ] <<  8)
+        | (aReverseNibble[ (x >>  0) & 0xF ] << 12);
 }
 
 // Expand 1-bit to 8-bit font texture atlas
