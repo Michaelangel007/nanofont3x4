@@ -136,8 +136,12 @@ const uint16_t aGlyphs3x4[] =
     0xA4A4  // 0x7F   101 010 101 010 // Alternative: Could even have a "full" 4x4 checkerboard
 };
 
-
 // Consts
+	const int BRIGHTNESS_PERMUTATION = 0xB0; // brightnes for each 64K permutation
+	const int BRIGHTNESS_GRID        = 0x22;
+    const int BRIGHTNESS_LABEL       = 0xE0;
+	const int BRIGHTNESS_HIGHLIGHT   = 0xFE; // highlight our 3x4 glyphs in the texture atlas
+
     // Enumerate all 65536 permutations of 4x4 monochrome bitmaps.
     // For convenience we can construct this as a master texture atlas
     // with 256 x 256 glyphs
@@ -146,11 +150,14 @@ const uint16_t aGlyphs3x4[] =
     const int    DIMY = 256*(4+BORDER)+AXISY; // top x-axis 
     const size_t AREA = DIMX*DIMY;
 
-    bool gbLabelAxis = AXISX | AXISY;
+    bool gbLabelAxis      = AXISX | AXISY;
+    bool bHighlightGlyphs = true;
 
 // Implementation _____________________________________________________________
 
-bool BMP_Write( const char *filename, int bitsPerPixel, unsigned int width, unsigned int height, const uint8_t *pixels, int outBitsPerPixel = 0 )
+bool BMP_Write( const char *filename, const int bitsPerPixel,
+    const unsigned int width, const unsigned int height, const uint8_t *pixels,
+    int outBitsPerPixel = 0 )
 {
     const uint16_t _16 = 0xFFFF; // 64K-1
     if ((width > _16) || (height > _16)) // Sanity Check: 64K * 64K = 4 GB
@@ -173,8 +180,11 @@ bool BMP_Write( const char *filename, int bitsPerPixel, unsigned int width, unsi
 
     uint16_t aHeader[ BITMAP_HEADER_SIZE/2 ]; // 54 bytes / 2 = 27 x 16-bit
 
-    const uint32_t nWidthBytes    = (width * outBitsPerPixel) / 8;
-    const uint32_t nExtraBytes    = (width * 3              ) % 4;
+    const uint32_t nWidthBytes    =     (width * outBitsPerPixel) / 8;
+//    const uint32_t nExtraBytes    = (width * 3              ) % 4;
+    const uint32_t nExtraBytes    = 4 - (nWidthBytes % 4);
+//    const uint8_t  aExtraBytes[]  = { 0, 0, 0, 0 };
+
     const uint32_t nScanLineBytes = nWidthBytes + nExtraBytes;
     const uint32_t nPaddedSize    = nScanLineBytes * height;
     const uint32_t nTexelOffset   = BITMAP_HEADER_SIZE + sPalette              ; // offset to palette start: &aHeader[27] - &aHeader[0]; 
@@ -349,18 +359,6 @@ void DrawGlyph4x4( uint8_t *texels, uint16_t x, uint16_t y, uint16_t glyph, uint
 
 
 // ======================================================================== 
-void RAW_SaveGreyscale8bit( const char *filename, const uint8_t *texels, const int width, const int height )
-{
-    FILE *pFile = fopen( filename, "w+b" );
-    if( pFile )
-    {
-        const size_t area = width * height;
-        fwrite( texels, area, 1, pFile );
-        fclose( pFile );
-    }
-}
-
-// ======================================================================== 
 void LabelAxis( uint8_t* texels )
 {
     const uint16_t aNumberGlyphs[ 16 ] = 
@@ -430,19 +428,21 @@ void LabelAxis( uint8_t* texels )
         int digit0 = aNumberGlyphs[ (byte >> 0) & 0xF ];
 
         int offset = byte*CELL;
+        int ramp   = byte & 0xF;
 
     // Label top X-axis
-        DrawGlyph4x4( texels, AXISX + offset, 0, digit1 );
-        DrawGlyph4x4( texels, AXISX + offset, 5, digit0 );
+        DrawGlyph4x4( texels, AXISX + offset, 0, digit1, BRIGHTNESS_LABEL + ramp );
+        DrawGlyph4x4( texels, AXISX + offset, 5, digit0, BRIGHTNESS_LABEL + ramp );
 
     // Label left Y-axis
-        DrawGlyph4x4( texels, 0, AXISY + offset, digit1 );
-        DrawGlyph4x4( texels, 4, AXISY + offset, digit0 );
+        DrawGlyph4x4( texels, 0, AXISY + offset, digit1, BRIGHTNESS_LABEL + ramp );
+        DrawGlyph4x4( texels, 4, AXISY + offset, digit0, BRIGHTNESS_LABEL + ramp );
     }
 }
 
+
 // ======================================================================== 
-void HighlightAlphabet( uint8_t* texels )
+void HighlightGlyphs( uint8_t* texels )
 {
     for( int byte = 0x20; byte < 0x80; byte++ )
     {
@@ -451,19 +451,51 @@ void HighlightAlphabet( uint8_t* texels )
         int      y  = (bits >> 8) & 0xFF;
         int      sx = CELL*x + AXISX;
         int      sy = CELL*y + AXISY;
-        DrawGlyph4x4( texels, sx, sy, bits, 0xFF );
+        DrawGlyph4x4( texels, sx, sy, bits, BRIGHTNESS_HIGHLIGHT );
     }
 }
+
+
+// ======================================================================== 
+void RAW8_to_BMP24( const uint8_t *raw, uint8_t* bitmap_, const int width, const int height, const uint32_t aPalette[] )
+{
+	uint32_t area = width * height;
+	for( uint32_t iPix = 0; iPix < area; iPix++ )
+	{
+        uint8_t i = *raw++;
+		uint8_t r = (aPalette[ i ] >>  0) & 0xFF;
+		uint8_t g = (aPalette[ i ] >>  8) & 0xFF;
+		uint8_t b = (aPalette[ i ] >> 16) & 0xFF;
+
+		*bitmap_++ = b;
+		*bitmap_++ = g;
+		*bitmap_++ = r;
+	}
+}
+
+
+// ======================================================================== 
+void RAW_SaveGreyscale8bit( const char *filename, const uint8_t *texels, const int width, const int height )
+{
+    FILE *pFile = fopen( filename, "w+b" );
+    if( pFile )
+    {
+        const size_t area = width * height;
+        fwrite( texels, area, 1, pFile );
+        fclose( pFile );
+    }
+}
+
 
 // ======================================================================== 
 int main()
 {
-    uint8_t  aBitmap[ DIMY ][ DIMX ];
-    uint8_t *pBitmap = &aBitmap[0][0];
-    memset(  pBitmap, 0x22*BORDER, AREA ); // save with faint grid lines if BORDER
+    uint8_t  aMonochrome[ DIMY ][ DIMX ];
+    uint8_t *pMonochrome = &aMonochrome[0][0];
+    memset(  pMonochrome, BRIGHTNESS_GRID*BORDER, AREA ); // save with faint grid lines if BORDER
 
 //int x = 0; int y = 0; int bits = 0x5A5A; // DEBUG
-//DrawGlyph4x4( (uint8_t*)aBitmap, x, y, bits ); // DEBUG
+//DrawGlyph4x4( (uint8_t*)aMonochrome, x, y, bits ); // DEBUG
 
     // Row
     for( int y = 0; y < 0x100; y++ )
@@ -472,33 +504,56 @@ int main()
         for( int x = 0; x < 0x100; x++ )
         {
             int bits = (y << 8) | x;
-
             // (y*CELL*DIMX) + (x*CELL) + (AXISY*DIMX) + AXISX
             int sx = CELL*x + AXISX;
             int sy = CELL*y + AXISY;
-            DrawGlyph4x4( (uint8_t*)aBitmap, sx, sy, bits, 0xB0 );
+            DrawGlyph4x4( pMonochrome, sx, sy, bits, BRIGHTNESS_PERMUTATION );
         }
     }
 
     if( gbLabelAxis )
-    {
-        LabelAxis( pBitmap );
-    }
+        LabelAxis( pMonochrome );
 
-    if( 0 )
-        HighlightAlphabet( pBitmap );
+    if( bHighlightGlyphs )
+        HighlightGlyphs( pMonochrome );
 
     // Save Raw
     char filename[ 256 ];
     sprintf( filename, "%dx%d_8bit_textureatlas.raw.data", DIMX, DIMY );
 
     const char *filenameRAW = filename;
-    RAW_SaveGreyscale8bit( filenameRAW, (uint8_t*)aBitmap, DIMX, DIMY );
+    RAW_SaveGreyscale8bit( filenameRAW, pMonochrome, DIMX, DIMY );
     printf( "Saved RAW: %s\n", filenameRAW );
+ 
+	sprintf( filename, "%dx%d_8bit_textureatlas.bmp", DIMX, DIMY );
+	const char *filenameBMP = filename;
 
-    // TODO: Convert 8-bit to 24-bit
-    // TODO: Colorize
-    // TODO: Now save 8-bit as 24-bit BMP
+    // Convert 8-bit to 24-bit and colorize
+	int      nPalette = 256;
+	uint32_t aPalette[ nPalette ]; // ABGR
+
+	for( int iPalette = 0; iPalette < nPalette; iPalette++ )
+		aPalette[ iPalette ] = 0;
+
+	aPalette[ BRIGHTNESS_GRID        ] = 0x00440000; // Blue
+	aPalette[ BRIGHTNESS_PERMUTATION ] = 0x00BBBBBB; // Medium Grey
+	aPalette[ BRIGHTNESS_HIGHLIGHT   ] = 0x000000FF; // Red
+
+    aPalette[ BRIGHTNESS_LABEL       ] = 0x0000FFFF; // Yellow
+    for( int i = 0; i < 16; i++ )
+    {
+        int b = 0xFF - (i*5);
+        int c = (b << 8) | b;
+        aPalette[ BRIGHTNESS_LABEL + i ] = c; // Yellow ramp
+    }
+
+	uint8_t * pBitmap = new uint8_t [ DIMX * DIMY * 3 ];
+//BMP_Write( filenameBMP, 8, DIMX, DIMY, pMonochrome, 24 ); // DEBUG
+	RAW8_to_BMP24( pMonochrome, pBitmap, DIMX, DIMY, aPalette );
+    BMP_Write( filenameBMP, 24, DIMX, DIMY, pBitmap );
+
+    printf( "Saved BMP: %s\n", filenameBMP );
+	delete [] pBitmap;
 
     return 0;
 }
