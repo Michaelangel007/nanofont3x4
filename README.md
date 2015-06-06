@@ -27,3 +27,9 @@ A practical example would be rendering "book pages" with real text instead of pl
 * Fake Bold
 
 <img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_bold_sources_ken.png">
+
+# Uber 4x4 Texture Atlas All Permutations 
+
+In case you are interested, there are a total of 65,536 4x4 monochrome glyphs. Here is a texture atlas that shows all of them, with our glyphs highlighted where they are in the table.
+
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/1289x1290_8bit_textureatlas.bmp">
