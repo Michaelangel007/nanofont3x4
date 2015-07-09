@@ -1,7 +1,9 @@
 /*  Nano Font 3x4 by Michaelangel007 aka MysticReddit
-    License: Creative Commons Zero v1.0
-        https://creativecommons.org/publicdomain/zero/1.0/   
-
+    License:
+        Font Glyph Data is Copyleft. That is 100% free as in speech and beer.
+        Source Code License: Creative Commons Zero v1.0
+            * https://creativecommons.org/publicdomain/zero/1.0/   
+    Purpose:
     A working example of clean code showing font rendering in less then
     700 lines of code including data!  It is the world's smallest 3x4 font
     that pushes the boundry of readability. :-)  Yes, it even includes 
@@ -21,7 +23,7 @@ Output:
     Will save output to: output.bmp
 
 Notes:
-    This source code is wider then 80 characters. Stop living in the 1970's.
+    This source code is wider then 80 characters. Stop living in the 1970's. :-)
 
 Related work:
     Ken Perlin makes the bogus claim
@@ -29,16 +31,20 @@ Related work:
     * http://blog.kenperlin.com/?p=6804
 
     There are numerous problems with this claim:
-        1. Where is the source cdoe + data to verify this claim??
-           This is extremely SLOPPY and unprofessional Science.
+
+        1. Where is the source cdoe + data to **verify** this claim??
+           This is extremely SLOPPY and unprofessional "Science."
+
         2. His font is 4x6 (including 1 px leading); 
-           while it looks great on LCD and takes advantage 
-           of color fringes, it is a far cry from the world's smallest font.
+           while it looks great on LCD and takes advantage of color fringes, it is a far cry from the world's smallest font.
            Apparently he is not aware of Anders de Flon 3x3 Font in 2005.
-           https://en.wikipedia.org/wiki/3x3
+           * https://en.wikipedia.org/wiki/3x3
 */
 
 // Includes
+#ifdef _WIN32
+    #define _CRT_SECURE_NO_WARNINGS // stupid MSVC warning crap
+#endif
     #include <stdio.h>
     #include <stdint.h> // uint8_t uint16_t uint32_t
     #include <string.h>
@@ -145,8 +151,9 @@ Related work:
 // ======================================================================== 
 bool BMP_Write( const char *filename, int bitsPerPixel, unsigned int width, unsigned int height, const uint8_t *pixels, int outBitsPerPixel = 0 )
 {
-    const uint16_t _16 = 0xFFFF; // 64K-1
-    if ((width > _16) || (height > _16)) // Sanity Check: 64K * 64K = 4 GB
+    const uint16_t _16  = 0xFFFF;
+    const uint32_t _64K = (1 << 16);
+    if ((width >= _64K) || (height > _64K)) // Sanity Check: 64K * 64K @ 8-bit/pixel = 4 GB !
         return false;
 
     if( !width || !height)
@@ -260,7 +267,7 @@ bool BMP_Write( const char *filename, int bitsPerPixel, unsigned int width, unsi
             }
         }
         else
-            printf( "Unsported BPP: %d != %d\n", bitsPerPixel, outBitsPerPixel );
+            printf( "Unsupported BPP: %d != %d\n", bitsPerPixel, outBitsPerPixel );
 
         fclose( file );
     }
@@ -284,7 +291,7 @@ bool Image_Write( const char *filename, int w, int h, const uint8_t *pixels )
     return pass;
 }
 
-// This entire font is copyleft since virtual "ownership" of bits (numbers) is retarded.
+// This entire font glyph data is Copyleft 2015 since virtual "ownership" of bits (numbers) is retarded.
 //
 // 3x4 Monochrome Font Glyphs within 4x4 cell
 // Each nibble is one row, with the bits stored in reverse order: msb = left column, lsb = right column
@@ -293,7 +300,8 @@ bool Image_Write( const char *filename, int w, int h, const uint8_t *pixels )
 //   efgh    Row1  XXX_  1110
 //   ijkl    Row2  X_X_  1010
 //   mnop    Row3  ____  0000
-// There are 64K permutations of a 4x4 monochrome cell.
+// If you are curious: There are 64K permutations of a 4x4 monochrome cell.
+// You will want to examine the output of: all_4x4_bitmaps.cpp
 // ======================================================================== 
 uint16_t aGlyphs3x4[] =
 {           // Hex    [1] [2] [3] [4] Scanlines
