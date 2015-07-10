@@ -1,5 +1,5 @@
 # nanofont3x4
-The world's smallest readable 3x3 font!  Includes:
+The world's smallest readable 3x3 font with readable lowercase!  Includes:
 
 * Upper case (3x3) plus 1 pixel leading (hence the name 3x4),
 * Lower case (some are 2x2!)
@@ -9,7 +9,7 @@ A "practical" example would be rendering "book pages" with real text instead of 
 
 Why even attempt to do the "impossible" of creating the worlds smallest readable lowercase font, of which some glyphs even fit in a 2x2 cell ? 
 
-Partially for the challenge, but mostly because only by pushing a craft to its maximum limits does it really force oneself to take a step back and _really_ analyze what the goal is.  What is the _"essence"_ of a glyph?  What makes a readable glyph?  Since there are no "extraneous" pixels to "fallback" onto **every** pixel becomes that much more important.  Even a 1 pixel mistakes really stands out.
+Partially for the challenge, but mostly because only by pushing a craft to its maximum limits does it really force oneself to take a step back and _really_ analyze what the goal is.  What is the _"essence"_ of a glyph?  What makes a readable glyph anywhere?  What is the "essence" of 'e', or 's' ?  Since there are no "extraneous" pixels to "fallback" onto **every** pixel becomes that much more important.  Even a 1 pixel mistakes really stands out.
 
 Starting with a 3x3 uppercase font that implies that the lowercase glyph must be focused around a 2x2 cell.
 
@@ -73,7 +73,7 @@ Here are the 16 permutations of a 2x2 font:
     xx no meaning, 
     ..
 
-    xx not usable
+    xx no meaning
     .x
 
     xx chosen as `r`
@@ -97,16 +97,15 @@ Here are the 16 permutations of a 2x2 font:
 <img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_declaration_lower3x4.bmp">
 
 
-* Upper case on its own source code with default 0 px leading:
-   `nanofont3x4 -u nanofont3x4.cpp`
+* Upper case on its own source code; with default 0 px leading: `nanofont3x4 -u nanofont3x4.cpp`
 
 <img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_0.bmp"> 
 
-* Forced upper case outwith with 1 px leading: `nanofont -u -1`
+* Forced upper case with 1 px leading: `nanofont -u -1 nanofont3x4.cpp`
 
 <img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_1.bmp"> 
 
-* Forced upper case outwith with 2 px leading: `nanofont -u -2`
+* Forced upper case with 2 px leading: `nanofont -u -2 nanofont3x4.cpp`
 
 <img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_2.bmp"> 
 
@@ -134,3 +133,11 @@ Anders de Flon created a 3x3 font but it is upper case only.
 
 * https://en.wikipedia.org/wiki/3x3
 
+Ken Perlin provided a 4x6 tiny font (2006, and again in 2010) but didn't provide any source code! WTF? :-(
+
+* http://mrl.nyu.edu/~perlin/homepage2006/tinyfont/
+* http://blog.kenperlin.com/?p=6804
+
+Domenico Mazza’s "Zepto" 3x5 font:
+
+* http://makezine.com/2010/11/19/a-tiny-screen-font-you-can-actually/
