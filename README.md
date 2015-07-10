@@ -1,15 +1,85 @@
 # nanofont3x4
-The world's smallest readable 3x4 font.  Includes:
+The world's smallest readable 3x3 font!  Includes:
 
 * Upper case (3x3) plus 1 pixel leading,
-* Lower case (2x2!)
+* Lower case (some are 2x2!)
 * All ASCII symbols
 
 A "practical" example would be rendering "book pages" with real text instead of placeholder blurry pixels that don't even look close to being the glyphs scaled down.
 
-Why attempt to do the "impossible" of creating lowercase letters in a 2x2 cell ?  That's only 16 choices for 26 lowercase letters!
+Why even attempt to do the "impossible" of creating the worlds smallest readable lowercase font, of which some glyphs even fit in a 2x2 cell ? 
 
-Partially for the challenge, but mostly because only by pushing a craft to its maximum limits does it really force oneself to take a step back and really analyze what the goal is.  A readable glyph.  Since there are no "extraneous" pixels to "fallback" onto, every pixel becomes that much more important.  Even a 1 pixel mistakes really stands out.
+Partially for the challenge, but mostly because only by pushing a craft to its maximum limits does it really force oneself to take a step back and _really_ analyze what the goal is.  What is the _"essence"_ of a glyph?  What makes a readable glyph?  Since there are no "extraneous" pixels to "fallback" onto **every** pixel becomes that much more important.  Even a 1 pixel mistakes really stands out.
+
+Starting with a 3x3 uppercase font that implies that the lowercase glyph must be focused around a 2x2 cell.
+
+That's only 16 choices for 26 lowercase letters!  In actuality readability is the most important goal so the following lowercase glyphs are not 2x2:
+
+    xxx `b` xxx `d` `e` `f` `g`
+    `h` xxx `j` `k` `l` `m` `n`
+    xxx `p` `q` xxx xxx `t` `u`
+    `v` `w` xxx `y` xxx
+
+That leaves these glyphs to fit inside a 2x2 cell.
+
+* a
+* c
+* e
+* i
+* o
+* r
+* s
+* x
+
+Here are the 16 permutations:
+
+    .. not usable = space
+    ..
+
+    .. not usuable = period but wrong kerning
+    .x 
+
+    .. not usable = period
+    x.
+
+    .. not usable, confused with `_`
+    xx
+
+    .x not usable,  wrong kerning
+    ..
+ 
+    .x not usable, wrong kerning
+    .x
+
+    .x chosen as `s
+    x.
+
+    .x chosen as `a`
+    xx
+
+    x. not usable
+    ..
+
+    x. chosen as `z`
+    .x
+
+    x. chosen as `i`
+    x.
+
+    x. chosen as `e`
+    xx
+
+    xx not usable
+    ..
+
+    xx not usable
+    .x
+
+    xx chosen as `r`
+    x.
+
+    xx chosen as `c` `o` and `x`
+    xx
 
 
 * Texture Atlas:
@@ -29,15 +99,15 @@ Partially for the challenge, but mostly because only by pushing a craft to its m
 * Upper case on its own source code with default 0 px leading:
    `nanofont3x4 -u nanofont3x4.cpp`
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_upper3x4_0.bmp"> 
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_0.bmp"> 
 
 * Forced upper case outwith with 1 px leading: `nanofont -u -1`
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_upper3x4_1.bmp"> 
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_1.bmp"> 
 
 * Forced upper case outwith with 2 px leading: `nanofont -u -2`
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_upper3x4_2.bmp"> 
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_2.bmp"> 
 
 * Fake Bold
 
