@@ -1,29 +1,27 @@
 /*  Nano Font 3x4 by Michaelangel007 aka MysticReddit
-    License:
-        Font Glyph Data is Copyleft. That is 100% free as in speech and beer.
-        Source Code License: Creative Commons Zero v1.0
-            * https://creativecommons.org/publicdomain/zero/1.0/   
-    Purpose:
+License:
+    Font Glyph Data is "copyleft." That is 100% free as in speech and beer -> www.wtfpl.net/
+    Source Code License: Creative Commons Zero v1.0
+        * https://creativecommons.org/publicdomain/zero/1.0/   
+Purpose:
     A working example of clean code showing font rendering in less then
     700 lines of code including data!  It is the world's smallest 3x4 font
     that pushes the boundry of readability. :-)  Yes, it even includes 
     lower case and the full ASCII character set!
 
-      Uppercase only = 3x3 with 1 pixel leading (spacer)
-      with Lowercase = 3x4 !
+        Uppercase only = 3x3 with 1 pixel leading (spacer)
+        with Lowercase = 3x4 ! (1 pixel leading is included)
 
 Compile:
     g++ nanofont3x4.cpp -o nanofont3x4 -Wall -Wextra
 
-Usage:
-    nanofont3x4 -u    # To force uppercase
+Usage: [-u] [-#]
+    nanofont3x4 -u    // To force uppercase
+    nanofont3x3 -#    // Use leading of # pixels
     nanofont3x3
 
 Output:
     Will save output to: output.bmp
-
-Notes:
-    This source code is wider then 80 characters. Stop living in the 1970's. :-)
 
 Related work:
     Ken Perlin makes the bogus claim
@@ -35,10 +33,12 @@ Related work:
         1. Where is the source cdoe + data to **verify** this claim??
            This is extremely SLOPPY and unprofessional "Science."
 
-        2. His font is 4x6 (including 1 px leading); 
-           while it looks great on LCD and takes advantage of color fringes, it is a far cry from the world's smallest font.
+        2. His font is 4x6 (including 1 px leading); while it looks great on LCD
+           and takes advantage of color fringes, it is a far cry from the world's smallest font.
            Apparently he is not aware of Anders de Flon 3x3 Font in 2005.
            * https://en.wikipedia.org/wiki/3x3
+Notes:
+    This source code is wider then 80 characters. Stop living in the 1970's. :-)
 */
 
 // Includes
@@ -50,7 +50,6 @@ Related work:
     #include <string.h>
 
 // Types
-    // ======================================================================== 
     struct Image
     {
         int      _width;
@@ -142,7 +141,7 @@ Related work:
         void setCellHeight( int height )  { _cellHeight = height; }
 
         bool doesWordWrap( int len, const char * text, int i, int cursorX, int rightMarginX, bool forceUppercase );
-        void render( Image & texture, int x, int y, const char * text, int length = 0, bool forceUppercase = false, int rightMargin = 0 );
+        void render( Image & texture, int x, int y, const char * text, int length = 0, bool forceUppercase = false, int rightMargin = 0, int leading = 0 );
     };
 
 // Implementation _____________________________________________________________
@@ -443,14 +442,14 @@ uint16_t SwapNibblesBitReverse( uint16_t x )
 
 // Expand 1-bit to 8-bit font texture atlas
 // ======================================================================== 
-void MonochromeFont2Bitmap( const int CellWidth, const int CellHeight, uint16_t *bitmap, Font & font )
+void MonochromeFont2Bitmap( const int CellWidth, const int CellHeight, uint16_t *bitmap, Font & font_ )
 {
-    font.setCellWidth ( CellWidth  );
-    font.setCellHeight( CellHeight );
+    font_.setCellWidth ( CellWidth  );
+    font_.setCellHeight( CellHeight );
 
-    font._width  = 16 * CellWidth; // 16 glyphs/row, each cell = 4 pixels wide
-    font._height =  8 * CellHeight; // 8 rows, each cell = 4 pixels tall
-    font.alloc();
+    font_._width  = 16 * CellWidth; // 16 glyphs/row, each cell = 4 pixels wide
+    font_._height =  8 * CellHeight; // 8 rows, each cell = 4 pixels tall
+    font_.alloc();
 
     int first = 0x20; // start at space
     int last  = 0x80; // end at 7-bit ASCII
@@ -459,7 +458,7 @@ void MonochromeFont2Bitmap( const int CellWidth, const int CellHeight, uint16_t 
     {
         int      x      = (iGlyph % 16) * CellWidth;  // cellX
         int      y      = (iGlyph / 16) * CellHeight; // cellY
-        uint8_t *pDst   = font.getOffset( x, y );
+        uint8_t *pDst   = font_.getOffset( x, y );
         uint16_t pixels = SwapNibblesBitReverse( bitmap[ iGlyph - 0x20 ] );
 
         int minWidth  = 0;
@@ -488,14 +487,14 @@ void MonochromeFont2Bitmap( const int CellWidth, const int CellHeight, uint16_t 
             }
 
             pDst -= CellWidth;
-            pDst += font._width;
+            pDst += font_._width;
         }
 
-        font.setGlyphsWidth ( iGlyph, minWidth  );
-        font.setGlyphsHeight( iGlyph, minHeight );
+        font_.setGlyphsWidth ( iGlyph, minWidth  );
+        font_.setGlyphsHeight( iGlyph, minHeight );
     }
 #if DEBUG
-    font.dump(); // DEBUG
+    font_.dump(); // DEBUG
 #endif
 }
 
@@ -549,7 +548,7 @@ bool Font::doesWordWrap( int len, const char * text, int i, int cursorX, int rig
 }
 
 // ======================================================================== 
-void Font::render( Image & texture, int x, int y, const char * text, int length /* = 0*/, bool forceUppercase /*= false*/, int rightMargin /*= 0*/ )
+void Font::render( Image & texture, int x, int y, const char * text, int length /* = 0*/, bool forceUppercase /*= false*/, int rightMargin /*= 0*/, int leading /*= 0*/ )
 {
     const int LeftMarginX = x;
     const int n = length ? length : strlen( text );
@@ -590,7 +589,7 @@ void Font::render( Image & texture, int x, int y, const char * text, int length 
         if ((c == '\n') || ((x + gw) >= RightMargin)) // (x+cw)
         {
             x = LeftMarginX;
-            y += ch;
+            y += ch + leading;
             if (c == '\n') 
                  continue;
         }
@@ -648,19 +647,21 @@ opposing with manly firmness his invasions on the rights of the people. He has r
 long time, after such dissolutions, to cause others to be elected; whereby the Legislative \
 powers, incapable of Annihilation, have returned to the People at large for their exercise;";
 
-    bool bUpperCase = false;
+    int bUpperCase = false, leading = 0;
     if (nArg > 1) 
     {
-        int iArg = 1;
-        if ((aArg[1][0] == '-') && (aArg[1][1] == 'u'))
-        {
-            bUpperCase = true;
-            iArg = 2;
-        }
+       int iArg;
+        for( iArg = 1; iArg < nArg; iArg++ )
+            if (aArg[iArg][0] == '-')
+                if (aArg[iArg][1] == 'u')
+                    bUpperCase = true;
+                else
+                if ((aArg[iArg][1] >= '0') && (aArg[iArg][1] <= '9'))
+                    leading    = aArg[iArg][1] - '0';
 
-        if (nArg > iArg)
+        if (iArg >= nArg)
         {
-            const char *filename = aArg[ iArg ];
+            const char *filename = aArg[ iArg-1 ];
             printf( "Reading: %s\n", filename );
             FILE *file = fopen( filename, "rb" );
             if( file )
@@ -683,17 +684,15 @@ powers, incapable of Annihilation, have returned to the People at large for thei
         ? "output_upper3x4.bmp"
         : "output_lower3x4.bmp";
 
-
-    Font3x4.render( Output, 2, 2, text, 0, bUpperCase );
+    Font3x4.render( Output, 2, 2, text, 0, (bUpperCase ? true : false), 0, leading );
     bool saved = BMP_Write( output_filename, 8, Output._width, Output._height, Output.getOffset(0,0), 24 );
     const char *status = saved 
         ?  "Saved: "
         :  "ERROR. Unable to write: ";
     printf( "%s%s\n", status, output_filename );
 
-#if 1 // DEBUG Save Texture Atlas
+    // DEBUG Save Texture Atlas
     BMP_Write( "nanofont3x4.bmp", 8, Font3x4._width, Font3x4._height, Font3x4.getOffset(0,0), 8 );
-#endif
 
     return 0;
 }
