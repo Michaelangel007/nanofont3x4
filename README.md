@@ -96,7 +96,7 @@ Here are the 16 permutations of a 2x2 font:
     xx chosen as `c` `o` and `x`
     xx
 
-Enough already, where are pictures!
+Enough already! where are the pictures? Alrighty then ...
 
 * Texture Atlas:
 
