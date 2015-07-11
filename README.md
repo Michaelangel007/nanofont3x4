@@ -15,7 +15,7 @@ Why?
 
 The short answer is: _To answer the unknown._
 
-The long anser is: Partially for the challenge, but mostly because only by pushing a craft to its **maximum limits** does it force oneself to take a step back and _really_ analyze what the goal is, and think laterally on how it might even be possible.  What _is_ the _"essence"_ of a glyph?  What makes a tiny glyph _readable_ anyways?  What makes an 'a' an 'a', an 'e' an 'e', or an 's' an 's' when you only have 3x3 or 2x2 pixels to work with?
+The long answer is: Partially for the challenge, but mostly because only by pushing a craft to its **maximum limits** does it force oneself to take a step back and _really_ analyze what the goal is, and think laterally on how it might even be possible.  What _is_ the _"essence"_ of a glyph?  What makes a tiny glyph _readable_ anyways?  What makes an 'a' an 'a', an 'e' an 'e', or an 's' an 's' when you only have 3x3 or 2x2 pixels to work with?
 
 Since there are no "extraneous" pixels to "fallback" onto then **every** pixel becomes that much more important.  Even a 1 pixel mistakes really stands out.  It was this quest for self discovery and understanding the Tao of Typography that this project was born.
 
