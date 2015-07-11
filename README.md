@@ -86,6 +86,7 @@ Here are the 16 permutations of a 2x2 font:
     xx chosen as `c` `o` and `x`
     xx
 
+Enough already, where are pictures!
 
 * Texture Atlas:
 
@@ -123,9 +124,9 @@ The reason for the funny dimensions is so that the resolution maps 1:1 on the iP
 
 * Italic?
 
-The annoying famous "Left as an exercise for the reader." :-)
+The famous but annoying _"Left as an exercise for the reader."_ :-)
 
-One would have to do a proper greyscale anti-aliasing offset to get italics.  Maybe someone else will take up the challenge? ;-)
+One would have to do a proper greyscale anti-aliasing partial-texel offset to get italics.  Maybe someone else will take up the challenge?
 
 
 # Uber 4x4 Texture Atlas All Permutations 
