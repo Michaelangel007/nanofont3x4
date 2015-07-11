@@ -9,11 +9,21 @@ A "practical" example would be rendering "book pages" with real text instead of 
 
 # Motivation
 
-Why even attempt to do the "impossible" of creating the worlds smallest readable lowercase font, of which some glyphs even fit in a 2x2 cell ? 
+Why even attempt to do the "impossible" task of creating the worlds smallest readable lowercase font? First, what the heck does it even mean to say "world's smallest font?"  Just how small can we go?  3x3? 2x2? Can we even design readable lowercase glyphs that can even fit into a 2x2 grid?  What is the minimal leading? How does leading effect readability?
 
-Partially for the challenge, but mostly because only by pushing a craft to its maximum limits does it really force oneself to take a step back and _really_ analyze what the goal is.  What is the _"essence"_ of a glyph?  What makes a readable glyph anywhere?  What is the "essence" of 'e', or 's' ?  Since there are no "extraneous" pixels to "fallback" onto **every** pixel becomes that much more important.  Even a 1 pixel mistakes really stands out.
+Why?
 
-Starting with a 3x3 uppercase font that implies that the lowercase glyph must be focused around a 2x2 cell.
+The short answer is: _To answer the unknown._
+
+The long anser is: Partially for the challenge, but mostly because only by pushing a craft to its **maximum limits** does it force oneself to take a step back and _really_ analyze what the goal is, and think laterally on how it might even be possible.  What _is_ the _"essence"_ of a glyph?  What makes a tiny glyph _readable_ anyways?  What makes an 'a' an 'a', an 'e' an 'e', or an 's' an 's' when you only have 3x3 or 2x2 pixels to work with?
+
+Since there are no "extraneous" pixels to "fallback" onto then **every** pixel becomes that much more important.  Even a 1 pixel mistakes really stands out.  It was this quest for self discovery and understanding the Tao of Typography that this project was born.
+
+# Uppercase 3x3
+
+A 3x3 uppercase has been "solved" or "known" for sometime.  This seemed like a good place to start.
+
+If we start with a 3x3 uppercase font then does that imply that the lowercase glyph must be focused around a 2x2 cell?  Let's find out!
 
 # Lowercase and 2x2
 
