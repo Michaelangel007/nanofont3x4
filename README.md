@@ -1,5 +1,5 @@
 # nanofont3x4
-The world's smallest readable 3x3 font with readable lowercase!  Includes:
+The world's smallest readable 3x4 font with readable lowercase!  Includes:
 
 * Upper case (3x3) plus 1 pixel leading (hence the name `3x4` for honesty),
 * Lower case (some are 2x2!)
