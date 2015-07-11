@@ -89,41 +89,50 @@ Here are the 16 permutations of a 2x2 font:
 
 * Texture Atlas:
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/nanofont3x4.bmp">
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/pic/nanofont3x4.bmp">
 
 
 * Forced upper case output: `nanofont -u`
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_declaration_upper3x4.bmp"> 
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/pic/output_declaration_upper3x4.bmp"> 
 
 * Normal case output:
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_declaration_lower3x4.bmp">
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/pic/output_declaration_lower3x4.bmp">
 
 
 * Upper case on its own source code; with default 0 px leading: `nanofont3x4 -u nanofont3x4.cpp`
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_0.bmp"> 
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/pic/output_nanofont3x4_upper_0.bmp"> 
 
 * Forced upper case with 1 px leading: `nanofont -u -1 nanofont3x4.cpp`
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_1.bmp"> 
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/pic/output_nanofont3x4_upper_1.bmp"> 
 
 * Forced upper case with 2 px leading: `nanofont -u -2 nanofont3x4.cpp`
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_nanofont3x4_upper_2.bmp"> 
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/pic/output_nanofont3x4_upper_2.bmp"> 
 
-* Fake Bold
+* Manual Fake Bold
+
+You can easily do a manual fake bold by dimming the font and brightening the areas you want bolded.
 
 The reason for the funny dimensions is so that the resolution maps 1:1 on the iPhone 5.
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/output_bold_sources_ken.png">
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/pic/output_bold_sources_ken.png">
+
+* Italic?
+
+The annoying famous "Left as an exercise for the reader." :-)
+
+One would have to do a proper greyscale anti-aliasing offset to get italics.  Maybe someone else will take up the challenge? ;-)
+
 
 # Uber 4x4 Texture Atlas All Permutations 
 
 In case you are interested, there are a total of 65,536 4x4 monochrome glyphs. Here is a uber texture atlas that shows all of them with our glyphs highlighted (red) where they are in the table.  Blue borders are used to show the cell boundaries.
 
-<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/1289x1290_8bit_textureatlas.bmp">
+<img src="https://raw.githubusercontent.com/Michaelangel007/nanofont3x4/master/pic/1289x1290_8bit_textureatlas.bmp">
 
 # Related work
 
