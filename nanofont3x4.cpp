@@ -451,9 +451,9 @@ void MonochromeFont2Bitmap( const int CellWidth, const int CellHeight, uint16_t 
     font_.alloc();
 
     int first = 0x20; // start at space
-    int last  = 0x80; // end at 7-bit ASCII
+    int last  = 0x7F; // end at 7-bit ASCII (inclusive)
 
-    for( int iGlyph = first; iGlyph < last; iGlyph++ )
+    for( int iGlyph = first; iGlyph <= last; iGlyph++ )
     {
         int      x      = (iGlyph % 16) * CellWidth;  // cellX
         int      y      = (iGlyph / 16) * CellHeight; // cellY
