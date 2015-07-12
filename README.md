@@ -46,7 +46,7 @@ That leaves these 9 glyphs to fit inside a 2x2 cell.
 * x
 * z
 
-Here are the 16 permutations of a 2x2 font:
+Here are the 2^4 = 16 permutations of a 2x2 glyph cell:
 
     .. not usable = space
     ..
@@ -96,6 +96,16 @@ Here are the 16 permutations of a 2x2 font:
     xx chosen as `c` `o` and `x`
     xx
 
+# Problem words
+
+What words are difficult to read?  Believe it or not, most words are actually readable (once you get used to the font.) Since we have 3 ambigious glyphs, the troublesome words are anything with a 'co' or 'x' in it such as:
+
+   * exercise
+   * becomes
+   * compliance
+
+A quick search of frequency analysis, "frequency of letter pairs", reveals that the pairs `oo` and `co` show up often enough that they will be annoying to "decode" the context.  If we could somehow distingush between `c` and `o` I estimate we could reach ~ 99% readability.  Oh, what what 1 extra vertical pixel adds!  But alas, we'll have to settle for "mostly readable." Still, I'm happy with this considering I thought the task was (almost) impossible when I first started.
+
 Enough already! where are the pictures? Alrighty then ...
 
 * Texture Atlas:
@@ -126,7 +136,7 @@ Enough already! where are the pictures? Alrighty then ...
 
 * Manual Fake Bold
 
-You can easily do a manual fake bold by dimming the font and brightening the areas you want bolded.
+You can easily do a manual fake bold by dimming the font and brightening the areas you want bolded. I regret I don't have code for this.
 
 The reason for the funny dimensions is so that the resolution maps 1:1 on the iPhone 5.
 
@@ -169,4 +179,14 @@ Domenico Mazza’s "Zepto" 3x5 font:
 "How small can you draw all 16 hex digits"; included 2x3 (!!), 2x4, 3x4 and 3x5.
 
 * https://www.allegro.cc/forums/thread/606221
+
+# Name and Shame
+
+To all researchers and scientists who don't make your code, and more importantly, your data available for independent verifcation -- get with the program, please.
+
+_"If I have seen further, it is by standing on the shoulders of giants"_ -- popularized by Isaac Newton, attributed to Bernard of Chartres.
+
+# Greetings and Thanks
+
+To all people obsessed with pixel fonts, Thank-You for sharing your work! Your stubborness to not accept reality for what it is, but to always push the boundaries of what is thought possible is an inspiration and reminder for us all to always strive and "reach for the stars."  What we learn along the way makes the journey worthwhile.
 
