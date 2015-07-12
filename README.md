@@ -1,19 +1,28 @@
 # nanofont3x4
+
 The world's smallest readable 3x4 font with readable lowercase!  Includes:
 
 * Upper case (3x3) plus 1 pixel leading (hence the name `3x4` for honesty),
 * Lower case (some are 2x2!)
 * All ASCII symbols
 
-A "practical" example would be rendering "book pages" with real text instead of placeholder blurry pixels that don't even look close to being the glyphs scaled down.
+# Practicality
+
+I know what you're thinking .. how the hell is this font, especially the lowercase 2x2 glyphs, even practical??
+
+Once the novelty wears off a "practical" example would be rendering "in-game book pages" that don't look like complete gibberish, or an "accurate print preview" with real text instead of blurry placeholder pixels that don't even look close to being the glyphs scaled down.
 
 # Motivation
 
-Why even attempt to do the "impossible" task of creating the worlds smallest readable lowercase font? First, what the heck does it even mean to say "world's smallest font?"  Just how small can we go?  3x3? 2x2? Can we even design readable lowercase glyphs that can even fit into a 2x2 grid?  What is the minimal leading? How does leading effect readability?
-
 Why?
 
-The short answer is: _To answer the unknown._
+Why even attempt to do the "impossible" task of creating the worlds smallest readable lowercase font? First, what the heck does it even mean to say _"world's smallest font?"_  This is, as far as I know as of July 2015, the only font that has readable 2x2 lowercase glyphs.  Please let me know if you find another one!
+
+Just how small of a font size can we go? 3x3? Yes, these have been done for upper case. See the References at the end.
+
+What about 2x2? Can we even design readable lowercase glyphs that can even fit into a 2x2 grid?  Also, what is the minimal leading? How does leading effect readability?
+
+The short answer to motivation is: _To answer the unknown._
 
 The long answer is: Partially for the challenge, but mostly because only by pushing a craft to its **maximum limits** does it force oneself to take a step back and _really_ analyze what the goal is, and think laterally on how it might even be possible.  What _is_ the _"essence"_ of a glyph?  What makes a tiny glyph _readable_ anyways?  What makes an 'a' an 'a', an 'e' an 'e', or an 's' an 's' when you only have 3x3 or 2x2 pixels to work with?
 
@@ -21,13 +30,13 @@ Since there are no "extraneous" pixels to "fallback" onto then **every** pixel b
 
 # Uppercase 3x3
 
-A 3x3 uppercase has been "solved" or "known" for sometime.  This seemed like a good place to start.
+A 3x3 uppercase has been "solved" or "known" for qutie sometime as I mentioned above. This seemed like a good place to start.
 
 If we start with a 3x3 uppercase font then does that imply that the lowercase glyph must be focused around a 2x2 cell?  Let's find out!
 
 # Lowercase and 2x2
 
-That's only 16 choices for 26 lowercase letters!  In actuality readability is the most important goal so the following lowercase glyphs are not 2x2:
+A 2x2 grid has 2^4 = 16 permutations.  That's only 16 choices for 26 lowercase letters!  In actuality readability is the most important goal so the following lowercase glyphs are not 2x2:
 
         `b`     `d`     `f` `g`
     `h`     `j` `k` `l` `m` `n`
@@ -46,7 +55,7 @@ That leaves these 9 glyphs to fit inside a 2x2 cell.
 * x
 * z
 
-Here are the 2^4 = 16 permutations of a 2x2 glyph cell:
+Here are all 16 permutations of a 2x2 glyph cell:
 
     .. not usable = space
     ..
