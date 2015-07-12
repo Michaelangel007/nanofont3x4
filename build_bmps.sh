@@ -16,3 +16,8 @@ mv output_lower3x4.bmp pic/output_nanofont3x4_lower.bmp
 
 mv nanofont3x.4bmp pic/nanofont3x4.bmp
 
+nanofont3x4 -u
+mv output_upper3x4.bmp pic/output_declaration_upper3x4.bmp
+
+nanofont3x4
+mv output_lower3x4.bmp pic/output_declaration_lower3x4.bmp
