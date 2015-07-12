@@ -115,7 +115,7 @@ What words are difficult to read?  Believe it or not, most words are actually re
 
 A quick search of frequency analysis, "frequency of letter pairs", reveals that the pairs `oo` and `co` show up often enough that they will be annoying to "decode" the context.  If we could somehow distingush between `c` and `o` I estimate we could reach ~ 99% readability.  Oh, what what 1 extra vertical pixel adds!  But alas, we'll have to settle for "mostly readable." Still, I'm happy with this considering I thought the task was (almost) impossible when I first started.
 
-Enough already! where are the pictures? Alrighty then ...
+Enough already! Where are the pictures? Well, alrighty then without further ado ...
 
 * Texture Atlas:
 
