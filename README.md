@@ -30,7 +30,7 @@ Since there are no "extraneous" pixels to "fallback" onto then **every** pixel b
 
 # Uppercase 3x3
 
-A 3x3 uppercase has been "solved" or "known" for qutie sometime as I mentioned above. This seemed like a good place to start.
+A 3x3 uppercase has been "solved" or "known" for quite sometime as I mentioned above. This seemed like a good place to start.
 
 If we start with a 3x3 uppercase font then does that imply that the lowercase glyph must be focused around a 2x2 cell?  Let's find out!
 
