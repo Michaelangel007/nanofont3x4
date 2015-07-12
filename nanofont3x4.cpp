@@ -378,13 +378,13 @@ uint16_t aGlyphs3x4[] =
     0x0CC0, // 0x63 c 000 110 110
     0x4CC0, // 0x64 d 010 110 110
     0x08C0, // 0x65 e 000 100 110
-    0x2440, // 0x66 f 001 010 010
+    0x4880, // 0x66 f 010 100 100
     0x0CCC, // 0x67 g 000 110 110 110
     0x8CC0, // 0x68 h 100 110 110
-    0x0440, // 0x69 i 000 010 010
+    0x0880, // 0x69 i 000 100 100
     0x0448, // 0x6A j 000 010 010 100
     0x8CA0, // 0x6B k 100 110 101
-    0x4420, // 0x6C l 010 010 001
+    0x8840, // 0x6C l 100 100 010
     0x0CE0, // 0x6D m 000 110 111
     0x0CA0, // 0x6E n 000 110 101
     0x0CC0, // 0x6F o 000 110 110
@@ -422,7 +422,6 @@ uint16_t SwapNibblesBitReverse( uint16_t x )
         0xA, // 5  0101 -> 1010
         0x6, // 6  0110 -> 0110
         0xE, // 7  0111 -> 1110
-
         0x1, // 8  1000 -> 0001
         0x9, // 9  1001 -> 1001
         0x5, // A  1010 -> 0101
@@ -599,7 +598,7 @@ void Font::render( Image & texture, int x, int y, const char * text, int length 
 
         Glyph_Copy( gw, gh, srcBitmap, srcWidth, srcHeight, sx, sy, dstBitmap, dstWidth, dstHeight, x, y );
 
-        x += gw + 1;
+        x += gw + 1; // always 1 px spacing between glyphs
     }
 }
 
