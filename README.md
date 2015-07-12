@@ -189,13 +189,17 @@ Domenico Mazza’s "Zepto" 3x5 font:
 
 * https://www.allegro.cc/forums/thread/606221
 
-# Name and Shame
+# Blame and Shame
 
 To all researchers and scientists who don't make your code, and more importantly, your data available for independent verifcation -- get with the program, please.
 
 _"If I have seen further, it is by standing on the shoulders of giants"_ -- popularized by Isaac Newton, attributed to Bernard of Chartres.
 
+# Name and Fame
+
+Special thanks to FontStruct `dpla` for the motivation to do the impossible!
+
 # Greetings and Thanks
 
-To all people obsessed with pixel fonts, Thank-You for sharing your work! Your stubborness to not accept reality for what it is, but to always push the boundaries of what is thought possible is an inspiration and reminder for us all to always strive and "reach for the stars."  What we learn along the way makes the journey worthwhile.
+To all people obsessed with pixel fonts: **Thank-You for sharing your work!** Your stubborness to not accept reality for what it is, but to always push the boundaries of what is thought possible is an inspiration and reminder for us all to always strive and "reach for the stars."  What we learn along the way makes the journey worthwhile.
 
