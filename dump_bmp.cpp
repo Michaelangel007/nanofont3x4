@@ -8,19 +8,19 @@
     const int BITMAPINFOHEADER_SIZE = 40; // 40 = 0x28 = BITMAPINFOHEADER size
 
 // Macros
-	inline
-	uint16_t get16( const uint8_t *data, int offset )
-	{
-		uint16_t *p = (uint16_t*) &data[ offset ];
-		return *p;
-	}
+    inline
+    uint16_t get16( const uint8_t *data, int offset )
+    {
+        uint16_t *p = (uint16_t*) &data[ offset ];
+        return *p;
+    }
 
-	inline
-	uint32_t get32( const uint8_t *data, int offset )
-	{
-		uint32_t *p = (uint32_t*) &data[ offset ];
-		return *p;
-	}
+    inline
+    uint32_t get32( const uint8_t *data, int offset )
+    {
+        uint32_t *p = (uint32_t*) &data[ offset ];
+        return *p;
+    }
 
 // Types
     struct WindowsBitmapFileHeader
@@ -56,7 +56,7 @@
             printf( "File Size: %08X (%d)\n", bfSize   , bfSize    );
             printf( "reserved : %08X     \n", reserved             );
             printf( "Offset   : %08X (%d)\n", bfOffbits, bfOffbits );
-			printf( "-------------------\n"        );
+            printf( "-------------------\n"        );
         }
     };
 
@@ -93,26 +93,26 @@
             biBitCount      = get16( data, 14 );
             biCompression   = get32( data, 16 );
             biSizeImage     = get32( data, 20 );
-			biXPelsPerMeter = get32( data, 24 );
-			biYPelsPerMeter = get32( data, 28 );
-			biClrUsed       = get32( data, 32 );
-			biClrImportant  = get32( data, 36 );
+            biXPelsPerMeter = get32( data, 24 );
+            biYPelsPerMeter = get32( data, 28 );
+            biClrUsed       = get32( data, 32 );
+            biClrImportant  = get32( data, 36 );
         }
 
         void dump()
         {
-#define	_ " :     "
-			printf( "HeadSize : %08X %s\n"  , biSize, biSize == BITMAPINFOHEADER_SIZE ? "Standard == 40" : "Non-Standard" );
-			printf( "Width    : %08X (%d)\n", biWidth, biWidth );
-			printf( "Height   : %08X (%d)\n", biHeight, biHeight );
-			printf( "Planes  "_"%04X (%d)\n", biPlanes, biPlanes );
-			printf(	"BitCount"_"%04X (%d)\n", biBitCount, biBitCount );
-			printf( "Compress : %08X %s\n"  , biCompression, biCompression == 0 ? "None" :	"Unknown" );
-			printf( "TexelSize: %08X (%d)\n", biSizeImage, biSizeImage );
-			printf( "X px/m   : %08X (%d)\n", biXPelsPerMeter, biXPelsPerMeter );
-			printf( "Y px/m   : %08X (%d)\n", biYPelsPerMeter, biYPelsPerMeter );
-			printf( "Palette  : %08X (%d)\n", biClrUsed, biClrUsed );
-			printf( "important: %08X (%d)\n", biClrImportant, biClrImportant );
+#define _ " :     "
+            printf( "HeadSize : %08X %s\n"  , biSize, biSize == BITMAPINFOHEADER_SIZE ? "Standard == 40" : "Non-Standard" );
+            printf( "Width    : %08X (%d)\n", biWidth, biWidth );
+            printf( "Height   : %08X (%d)\n", biHeight, biHeight );
+            printf( "Planes  "_"%04X (%d)\n", biPlanes, biPlanes );
+            printf( "BitCount"_"%04X (%d)\n", biBitCount, biBitCount );
+            printf( "Compress : %08X %s\n"  , biCompression, biCompression == 0 ? "None" : "Unknown" );
+            printf( "TexelSize: %08X (%d)\n", biSizeImage, biSizeImage );
+            printf( "X px/m   : %08X (%d)\n", biXPelsPerMeter, biXPelsPerMeter );
+            printf( "Y px/m   : %08X (%d)\n", biYPelsPerMeter, biYPelsPerMeter );
+            printf( "Palette  : %08X (%d)\n", biClrUsed, biClrUsed );
+            printf( "important: %08X (%d)\n", biClrImportant, biClrImportant );
         }
     };
 
@@ -123,8 +123,8 @@ int main( int nArg, char *aArg[] )
         FILE *file = fopen( aArg[1], "rb" );
         if( file )
         {
-			uint8_t head[ BITMAPFILEHEADER_SIZE ];
-			uint8_t info[ BITMAPINFOHEADER_SIZE ];
+            uint8_t head[ BITMAPFILEHEADER_SIZE ];
+            uint8_t info[ BITMAPINFOHEADER_SIZE ];
 
             fread( head, BITMAPFILEHEADER_SIZE, 1, file );
             fread( info, BITMAPINFOHEADER_SIZE, 1, file );
