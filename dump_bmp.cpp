@@ -113,6 +113,7 @@
             printf( "Y px/m   : %08X (%d)\n", biYPelsPerMeter, biYPelsPerMeter );
             printf( "Palette  : %08X (%d)\n", biClrUsed, biClrUsed );
             printf( "important: %08X (%d)\n", biClrImportant, biClrImportant );
+#undef _
         }
     };
 
