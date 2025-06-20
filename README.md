@@ -189,6 +189,10 @@ Domenico Mazza’s "Zepto" 3x5 font:
 
 * https://www.allegro.cc/forums/thread/606221
 
+Miniwi font
+
+* https://github.com/josuah/miniwi
+
 # Blame and Shame
 
 To all researchers and scientists who don't make your code, and more importantly, your data available for independent verifcation -- get with the program, please.
